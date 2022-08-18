@@ -1,6 +1,6 @@
 terraform {
   cloud {
-    organization = "YoHashi "
+    organization = "YoHashi"
     workspaces {
       name = "tf-examples"
     }
