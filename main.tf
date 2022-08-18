@@ -1,6 +1,6 @@
 terraform {
   cloud {
-    organization = "YoHashi"
+    organization = "YoHashi1"
     workspaces {
       name = "tf-examples"
     }
@@ -15,7 +15,7 @@ terraform {
   }
 }
 data "tfe_organization" "foo" {
-  name = "YoHashi"
+  name = "YoHashi1"
 }
 output "org" {
   description = "Org Name"
