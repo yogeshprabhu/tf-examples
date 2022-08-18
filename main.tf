@@ -8,7 +8,7 @@ terraform {
 
     workspaces {
 
-      name = "tf-examaples"
+      name = "tf-examples"
 
     }
 
