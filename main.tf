@@ -25,8 +25,8 @@ output "email" {
   description = "Org Email"
   value       = data.tfe_organization.foo.email
 }
-resource "tfe_variable_set" "test" {
-  name         = "Test Varset"
+resource "tfe_variable_set" "test1" {
+  name         = "Test1 Varset"
   description  = "Some description."
   organization = data.tfe_organization.foo.name
 
