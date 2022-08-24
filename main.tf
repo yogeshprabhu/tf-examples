@@ -43,7 +43,6 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "web" {
-  count                  = 1
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = "m5.large"
   vpc_security_group_ids = [aws_security_group.web-sg.id]
@@ -51,7 +50,7 @@ resource "aws_instance" "web" {
   tags = {
     # The count.index allows you to launch a resource 
     # starting with the distinct index number 0 and corresponding to this instance.
-    Name = "Yogesh-${count.index}"
+    Name = "Yogesh-HCP"
   }
 
   user_data = <<-EOF
