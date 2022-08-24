@@ -48,26 +48,20 @@ resource "aws_instance" "web" {
   vpc_security_group_ids = [aws_security_group.web-sg.id]
 
   tags = {
-    # The count.index allows you to launch a resource 
-    # starting with the distinct index number 0 and corresponding to this instance.
-    Name = "Yogesh-HCP"
+    Name = "Yogesh-TFE"
   }
 
   user_data = <<-EOF
               #!/bin/bash
               apt-get update
-              #apt-get install -y apache2
-              #sed -i -e 's/80/8080/' /etc/apache2/ports.conf
-              #echo "Hello World" > /var/www/html/index.html
-              #systemctl restart apache2
               EOF
 }
 
 resource "aws_security_group" "web-sg" {
   name = "${random_pet.sg.id}-sg"
   ingress {
-    from_port   = 8080
-    to_port     = 8080
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
