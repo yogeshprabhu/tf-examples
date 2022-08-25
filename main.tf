@@ -12,10 +12,10 @@ terraform {
   required_version = ">= 1.1.0"
 
   cloud {
-    organization = var.tfc_org
+    organization = "YoHashi"
 
     workspaces {
-      name = var.tfc_workspace
+      name = "tf_examples"
     }
   }
 }
