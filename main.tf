@@ -12,10 +12,10 @@ terraform {
   required_version = ">= 1.1.0"
 
   cloud {
-    organization = "YoHashi"
+    organization = var.tfc_org
 
     workspaces {
-      name = "tf-examples"
+      name = var.tfc_workspace
     }
   }
 }
@@ -44,15 +44,15 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_instance" "web" {
   ami                    = data.aws_ami.ubuntu.id
-  instance_type          = "m5.large"
+  instance_type          = var.ec2_instance_type
   vpc_security_group_ids = [aws_security_group.web-sg.id]
-  key_name               = "yoge"
-  root_block_device = {
-    volume_size           = 50
+  key_name               = var.aws_key_name
+  root_block_device {
+    volume_size           = var.ec2_volume_size
     delete_on_termination = true
   }
   tags = {
-    Name = "Yogesh"
+    Name = var.default_tag
   }
 
   user_data = <<-EOF
@@ -110,6 +110,4 @@ resource "aws_security_group" "web-sg" {
   }
 }
 
-output "web-address" {
-  value = "${aws_instance.web.public_dns}:8800"
-}
+
