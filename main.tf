@@ -54,7 +54,20 @@ resource "aws_instance" "web" {
 
   user_data = <<-EOF
               #!/bin/bash
+              # Install docker prereqs
               apt-get update
+              sudo apt -y install containerd
+              containerd --version
+              runc --version
+              apt-get update
+              wget https://docs.docker.com/engine/install/ubuntu/#set-up-the-repository
+              sudo apt-get -y install ca-certificates curl gnupg  lsb-release
+              mkdir -p /etc/apt/keyrings
+              sudo mkdir -p /etc/apt/keyrings
+              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+              echo   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+              sudo apt-get update
+              sudo apt-get -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
               EOF
 }
 
@@ -73,7 +86,12 @@ resource "aws_security_group" "web-sg" {
     from_port   = "80"
     to_port     = "80"
   }
-
+  ingress {
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    from_port   = "8800"
+    to_port     = "8800"
+  }
   ingress {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
@@ -90,5 +108,5 @@ resource "aws_security_group" "web-sg" {
 }
 
 output "web-address" {
-  value = "${aws_instance.web.public_dns}:8080"
+  value = "${aws_instance.web.public_dns}:8800"
 }
