@@ -47,8 +47,8 @@ resource "aws_instance" "web" {
   instance_type          = "m5.large"
   vpc_security_group_ids = [aws_security_group.web-sg.id]
   key_name               = "yoge"
-  root_block_device      = { 
-    volume_size          = 50
+  root_block_device = {
+    volume_size           = 50
     delete_on_termination = true
   }
   tags = {
