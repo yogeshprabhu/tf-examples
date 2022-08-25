@@ -1,16 +1,3 @@
-variable "tfc_org" {
-  type        = string
-  description = "TFE organization name"
-  default     = "YoHashi" # Please change ec2 instance type here
-}
-
-
-variable "tfc_workspace" {
-  type        = string
-  description = "TFC workspace"
-  default     = "tf_examples" # Please change ec2 instance type here
-}
-
 
 
 # Define EC2 instance type
