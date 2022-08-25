@@ -15,7 +15,7 @@ terraform {
     organization = "YoHashi"
 
     workspaces {
-      name = "tf_examples"
+      name = "tf-examples"
     }
   }
 }
