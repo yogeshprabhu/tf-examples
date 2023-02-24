@@ -15,7 +15,7 @@ terraform {
     organization = "YoHashi"
 
     workspaces {
-      name = "tf-examples"
+      name = "aws-workload-identity-test"
     }
   }
 }
